@@ -65,12 +65,13 @@ export default function PollDate(props) {
             >
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateTimePicker
-                        label="Fim"
+                        label={props.start === "" ? "" : "Fim"}
                         value={props.end}
                         disablePast={true}
+                        disabled={props.start === "" ? true : false}
                         inputFormat="dd/MM/yyyy HH:mm"
                         onChange={(newValue) => {
-                            if(props.start === "" || newValue.getTime() > props.start.getTime()){
+                            if(newValue.getTime() > props.start.getTime()){
                                 setValidEnd(true);
                                 props.setEnd(newValue);
                             }else{

@@ -11,6 +11,7 @@ export default function PollDate(props) {
     const message = (string1, string2, operator) => {
         return `A data de ${string1} deve ser ${operator} que a da data de ${string2}.`
     }
+    console.log(props)
     return (            
         
         <Grid

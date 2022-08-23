@@ -1,5 +1,5 @@
 const {Polls, Options} = require("./models");
-// const {getPollStatus} = require("./models/polls");
+
 module.exports = {
     createPoll: async function (object){
         const newPoll = await Polls.create(object);

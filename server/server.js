@@ -13,7 +13,6 @@ const {
     deleteOption,
     getOptionById,
     getTotalVotes,
-    getPollStatus
 } = require("./crud");
 
 app.use(express.urlencoded({ extended: true}));

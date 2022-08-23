@@ -19,7 +19,7 @@ export default function PollsPainel() {
     const [newPoll, setNewPoll] = React.useState(false);
     const [maxPage, setMaxPage] = React.useState(undefined);
     const width = () => {if(seeAll) {return "90%"} else {return "50%"}}
-    console.log(maxPage)
+
     if(!localStorage.getItem("votes")){
         localStorage.setItem("votes", "[]");
     }

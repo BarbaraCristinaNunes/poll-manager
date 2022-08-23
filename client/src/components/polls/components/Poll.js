@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid, Typography } from '@mui/material';
-import { getOptionsByPollId } from '../../../crud';
+import { getOptionsByPollId, getPollById, getTotalVotes } from '../../../crud';
 import {Option} from './Option';
 import {checkVote, convertDateFormat} from '../../Operations';
 
@@ -9,23 +9,59 @@ export function Poll(props) {
     const [isLoading, setIsLoading] = React.useState(true);
     const [votes, setVotes] = React.useState(0);
     const [vote, setVote] = React.useState(0)
-
+    const [status, setStatus] = React.useState(props.poll.status.disabled);
+    
     React.useEffect(() => {
         getOptionsByPollId(props.poll.id)
-            .then((data) => {setOptions(data)})            
+            .then((data) => {
+                setOptions(data);
+                setIsLoading(false);
+            })            
     }, [])
 
-    React.useEffect(() => {
-        if (options) {
-            setIsLoading(false);
-            let result = 0;
-            options.forEach((option) => {
-                result += option.score;                
-            })
-            setVotes(result);
-        }
-    }, [options, votes]); 
+    // React.useEffect(() => {
+    //     if (options) {
+    //         setIsLoading(false);
+    //         let result = 0;
+    //         options.forEach((option) => {
+    //             result += option.score;                
+    //         })
+    //         setVotes(result);
+    //     }
+    // }, [options, votes]); 
     
+    // React.useEffect(() => {
+    //     const getStatus = setInterval(() => {
+    //         getPollStatus(props.poll.id)
+    //             .then((data) => {
+    //                 setStatus(data.disabled);
+    //             })
+    //     }, 5000);
+    //     return () => clearInterval(getStatus);
+    // }, []);
+
+    React.useEffect(() => {
+        getTotalVotes(props.poll.id)
+            .then((data) => {
+                setVotes(data.total);
+            })
+        const getVotes = setInterval(() => {
+            console.log("poll.js getTotalVotes: ", props.poll.id)
+            getTotalVotes(props.poll.id)
+                .then((data) => {
+                    setVotes(data.total);
+                });
+            
+            getPollById(props.poll.id)
+                .then((data) => {
+                    setStatus(data[0].status.disabled);
+                })
+
+        }, 500);
+        return () => clearInterval(getVotes);
+    }, [votes]);
+    // console.log("vote ", vote, "votes ", votes)
+
     return (
         <>
         {
@@ -67,12 +103,13 @@ export function Poll(props) {
                                     >
                                         <Option 
                                             option={option} 
+                                            pollId={props.poll.id}
                                             // ableStatus able and disable poll. It is a boolean
                                             ableStatus={
                                                 // checkVote check if user voted or not in a specific poll
                                                 checkVote(props.poll.id, "pollId") ? 
                                                 checkVote(props.poll.id, "pollId") : 
-                                                props.poll.status.disabled
+                                                status
                                             } 
                                             votes={votes}
                                             setVote={(v) => {setVote(v)}}
@@ -88,11 +125,11 @@ export function Poll(props) {
                             sx={{backgroundColor: "#ffffff", paddingBottom: 2}}
                         >
                             {
-                                vote !== 0 ?
-                                    <Typography variant='body2' sx={{marginLeft: 3}}>
-                                        {`Total de votos ${vote}`}
-                                    </Typography>  
-                                :      
+                                // vote !== 0 ?
+                                //     <Typography variant='body2' sx={{marginLeft: 3}}>
+                                //         {`Total de votos ${vote}`}
+                                //     </Typography>  
+                                // :      
 
                                     <Typography variant='body2' sx={{marginLeft: 3}}>
                                         {`Total de votos ${votes}`}

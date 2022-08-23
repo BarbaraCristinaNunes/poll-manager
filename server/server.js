@@ -9,6 +9,11 @@ const {
     createPoll,
     createOption,
     updateOptionScore,
+    deletePoll,
+    deleteOption,
+    getOptionById,
+    getTotalVotes,
+    getPollStatus
 } = require("./crud");
 
 app.use(express.urlencoded({ extended: true}));
@@ -34,6 +39,21 @@ app.post("/polls", async (req, res) => {
     res.send({id: newPoll});
 });
 
+app.post("/polls/:id", async (req, res) => {
+    await deletePoll(req.params.id)
+});
+
+app.get("/votes/:id", async (req, res) => {
+    console.log("SERVER: ", req.params.id)
+    const result = await getTotalVotes(req.params.id);
+    res.send({total: result});
+});
+
+app.get("/option/:id", async (req, res) => {
+    const result = await getOptionById(req.params.id);
+    res.send(result);
+});
+
 app.get("/options/:id", async (req, res) => {
     const result = await getOptionsByPollId(req.params.id);
     res.send(result);
@@ -45,8 +65,11 @@ app.post("/options", async (req, res) => {
 });
 
 app.put("/options/:id", async (req, res) => {
-    await updateOptionScore(req.params.id, req.body.score);
+    await updateOptionScore(req.params.id);
 });
 
+app.post("/options/:id", async (req, res) => {
+    await deleteOption(req.params.id);
+});
 
 app.listen(3001, () => console.log("Server started!"))

@@ -45,7 +45,7 @@ export function Option(props) {
                             if(!props.ableStatus){
                                 // const vote = socre + 1;
                                 // const totalVotes = props.votes + 1;
-                                // setCheckStatus(true);
+                                setCheckStatus(true);
                                 // setScore(vote);
                                 // props.setVote(totalVotes);
                                 updateOptionScore(props.option.id)
@@ -53,7 +53,7 @@ export function Option(props) {
                                 const userOption = {optionId: props.option.id, pollId: props.option.pollid};
                                 const userVotes = JSON.parse(localStorage.getItem("votes").slice(","));
                                 userVotes.push(userOption);
-                                // localStorage.setItem("votes", JSON.stringify(userVotes));
+                                localStorage.setItem("votes", JSON.stringify(userVotes));
                             }
                         }}
                     />

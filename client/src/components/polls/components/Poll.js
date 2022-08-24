@@ -9,7 +9,7 @@ export function Poll(props) {
     const [isLoading, setIsLoading] = React.useState(true);
     const [votes, setVotes] = React.useState(0);
     const [error, setError] = React.useState("");
-    console.log(props.poll)
+    
     React.useEffect(() => {
         getOptionsByPollId(props.poll.id)
             .then((data) => {

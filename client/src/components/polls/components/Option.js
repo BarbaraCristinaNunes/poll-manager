@@ -54,7 +54,7 @@ export function Option(props) {
                             if(!props.ableStatus){
                                 updateOptionScore(props.option.id, props.pollId)
                                     .then((responde) => {
-                                        console.log("responde ", responde)
+
                                         if(responde){
                                             const vote = score + 1;
                                             const totalVotes = props.votes + 1;

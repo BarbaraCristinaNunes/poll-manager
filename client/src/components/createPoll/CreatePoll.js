@@ -11,7 +11,6 @@ import SavePoll from './SavePoll';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 export default function CreatePoll(props){
-    console.log(props.page)
     const [title, setTitle] = React.useState("");
     const [start, setStart] = React.useState("");
     const [end, setEnd] = React.useState("");

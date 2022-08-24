@@ -7,7 +7,6 @@ import { checkNewPollData, maxPaginationPage } from '../Operations';
 
 export default function SavePoll(props) {
     const poll = {title: props.title, start: props.start, end: props.end};
-    console.log(props.page)
     return (
         <Button 
             variant="contained"

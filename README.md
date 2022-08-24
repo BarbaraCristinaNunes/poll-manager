@@ -78,12 +78,10 @@ O projeto do front-end encontra-se na pasta `client`. O front-end foi desenvolvi
 
 * AllPolls.js => Este componente mostra o título de todas as enquetes que existem no banco de dados e é onde o usuário seleciona qual enquete deseja ver.
 
----
 ### *src/components/polls/components/Poll.js* 
 
 Este componente mostra as informações de uma enquete específica e utiliza o componente Option.js.
 
----
 ### *src/components/polls/components/Option.js* 
 
 Este componente representa uma unica opção de uma enquete. Portanto um `.map()` é realizado em Poll para mostrar todas as opções de uma enquete. Aqui as opções são representadas em checkboxs que estão disponíveis para interação do usuário apenas se a enquete estiver ativa e se o usuário ainda não tiver votado.

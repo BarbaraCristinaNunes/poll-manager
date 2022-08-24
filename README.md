@@ -2,15 +2,14 @@
 
 Este projeto foi iniciado em 15/08/2022 e finalizado em 24/08/2022
 
+*Observação: Esse projeto foi testado em um computador que contém o sistema operacional Windows 10*
 ## **Dependências**
 
 * npm: v 8.14.0
 * node v 16.14.2
 * MariaDB v 10.4.21
 
-*Note 1: As informações de instalação do MariaDB encontram-se no site [MariaDB Foundation](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.9.2&os=windows&cpu=x86_64&pkg=msi&m=serverion). O MariaDB também pode ser intalado via [XAMPP](https://www.apachefriends.org/download.html)*
-
-*Note 2: Sistema operacional Windows 10*
+*Observação: As informações de instalação do MariaDB encontram-se no site [MariaDB Foundation](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.9.2&os=windows&cpu=x86_64&pkg=msi&m=serverion). O MariaDB também pode ser intalado via [XAMPP](https://www.apachefriends.org/download.html)*
 
 ----
 ## **Projeto do back-end**
@@ -88,7 +87,7 @@ Rode `npm start` para iniciar o front-end
 ---
 ### *src/components/polls/components/Poll.js* 
 
-Este componente mostra as informações de uma enquete específica e chama o componente Option.js.
+Este componente mostra as informações de uma enquete específica e utiliza o componente Option.js.
 
 ---
 ### *src/components/polls/components/Option.js* 
@@ -97,7 +96,12 @@ Este componente representa uma unica opção de uma enquete. Portanto um `.map()
 
 O voto do usuário é salvo no `localStorage` sempre que o mesmo vota em uma enquete. O voto é salvo como um objeto que contem o id da opção selecionada e da enquete à qual a opção pertence. 
 
-> Todo o projeto foi pensado para representar um sistema de votação cujo usuário pode votar apenas uma vez em cada enquete. O voto do mesmo é salvo no `localStorage` para que não seja necessário manter um cadastro de usuários no banco de dados. Para tornar o projeto em um sistema de votação no qual o usuário pode votar quantas vezes quiser em qualquer enquete basta retirar ou comentar o código que salva o voto no `localstorage` e limpar o mesmo usando o método `localStorage.clear()`.
+> Todo o projeto foi pensado para simular um sistema de votação cujo usuário pode votar apenas uma vez em cada enquete. O voto do mesmo é salvo no `localStorage` para que não seja necessário manter um cadastro de usuários no banco de dados. 
+
+*Observação 1: Para tornar o projeto em um sistema de votação no qual o usuário pode votar quantas vezes quiser em qualquer enquete é necessário retirar ou comentar o código que salva o voto no `localstorage`,  limpar o mesmo usando o método `localStorage.clear()` e desativar o código checa se a enquete já foi ou não votada.*
+
+*Observação 2: O usuário poderá votar em uma enquete mais de uma vez caso esteja usando uma sessão anônima, pois os dados gerados neste cenário não são salvos permanentemente no localStorage.*
+
 
 O voto é checado pelo método `checkVote()` do Operations.js. A resposta desse método é utilizada nos componentes:
 
@@ -107,14 +111,14 @@ O voto é checado pelo método `checkVote()` do Operations.js. A resposta desse 
 
 * Option.js => Para verificar qual opção foi votada e mantê-la como selecionada.
 
-> Nesse componente também existe um `setInterval()` que chama a função `getOptionsByPollId()` para retorna todas as opções de uma enquete. O objetivo aqui é acessar os dados das opções a cada minuto e mostrar o score e o total de votos de uma enquete em tempo real.
+> Nesse componente também existe um `setInterval()` que utiliza a função `getOptionsByPollId()` para retorna todas as opções de uma enquete. O objetivo aqui é acessar os dados das opções a cada minuto e mostrar o score e o total de votos de uma enquete em tempo real.
 
 ------------
 ### *src/components/creaatePoll/CreatePoll.js* 
 
-Este componente é o formulário de criação de novas enquetes. Ele chama os componentes PollDate.js e SavePoll.js.
+Este componente é o formulário de criação de novas enquetes. Ele utiliza os componentes PollDate.js e SavePoll.js.
 
 Create.Poll.js contém todas as informações necessárias para fazer uma enquete e as envia para o componente `SavePoll`. 
 O componente `SavePoll` é um botão que chama os métodos `createPoll()` e `createOption()` do crud.js. Esse métodos são responsáveis por criar uma nova enquete e uma nova opção no banco de dados.
 
-O botão de criar do componente SavePoll fica abilitado apenas quando não existem variáveis vazias em CreatePoll.js. Essa verificação é feita pela função `checkNewPollData()` do arquivo Operations.js. Dessa forma é garantido que nenhuma coluna das tabelas polls e options fique em branco/vazias.
+O botão de criar do componente SavePoll fica habilitado apenas quando não existem variáveis vazias em CreatePoll.js. Essa verificação é feita pela função `checkNewPollData()` do arquivo Operations.js. Dessa forma é garantido que nenhuma coluna das tabelas polls e options fique em branco/vazias.

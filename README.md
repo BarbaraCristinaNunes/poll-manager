@@ -12,13 +12,10 @@ Este projeto foi iniciado em 15/08/2022 e finalizado em 24/08/2022
 *Observação: As informações de instalação do MariaDB encontram-se no site [MariaDB Foundation](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.9.2&os=windows&cpu=x86_64&pkg=msi&m=serverion). O MariaDB também pode ser intalado via [XAMPP](https://www.apachefriends.org/download.html)*
 
 ----
-## **Projeto do back-end**
 
-O projeto do back-end encontra-se na pasta `server` e foi desenvolvido em Node.js. O ORM Sequelize foi utilizado para gerenciar o banco de dados.
+## **Instalação do projeto**
 
-
-----
-### **Passos para iniciar o back-end**
+### Passos para iniciar o back-end
 
 * Após clonar este repositório, vá para a pasta server (`cd server`) e rode `npm install` para instalar as dependências.
 
@@ -29,7 +26,18 @@ O projeto do back-end encontra-se na pasta `server` e foi desenvolvido em Node.j
 * Rode `npx sequelize-cli db:migrate` para criar as tabelas Polls e Options no banco de dados/
 
 * Rode `node server` para iniciar o back-end
- ---
+
+### Passos para iniciar o front-end
+* Após clonar este repositório, vá para a pasta client (`cd client`) e rode `npm install` para instalar as dependências.
+
+* Rode `npm start` para iniciar o front-end
+
+
+----
+## **Projeto do back-end**
+
+O projeto do back-end encontra-se na pasta `server` e foi desenvolvido em Node.js. O ORM Sequelize foi utilizado para gerenciar o banco de dados.
+
 ### *Pasta models*
 
 Na pasta models você encontra os arquivos options.js e polls.js. Esses arquivos representam as tabelas que foram criadas para esse projeto.
@@ -38,7 +46,6 @@ Na classe Polls existe o método `getPollStatus()` que verifica se o momento atu
 
 > A variável **status** é uma variável virtual dinâmica que exite apenas em polls.js. Não existe uma coluna na tabela polls para essa variável.
 
------
 ### *crud.js*
 
 Os métodos responsáveis por *mostrar, criar, deletar e alterar* os dados das tabelas estão no arquivo crud. 
@@ -47,25 +54,14 @@ O método `updateOptionScore()` contabiliza os votos que cada opção de uma enq
 
 > Embora os métodos `deletePoll()`, `updatePoll()` e `deleteOption()` estejam no crud.js e funcionando, não são métodos utilizados no fron-end. Portanto, não foram escritos endpoints para os mesmos. 
 
----------
-
 ### *server.js*
 
 No server estão todos os endpoints que ligam o front-end com as funções do crud.js.
 
-----------------------
-
-## Projeto do front-end
+------------
+## **Projeto do front-end**
 
 O projeto do front-end encontra-se na pasta `client`. O front-end foi desenvolvido em React.js e Material UI, pois são bibliotacas que facilitam o desenvolvimento de aplicações responsivas, que são ideais para uso mobile, em um curto prazo. 
-
-------------
-### **Passos para iniciar o front-end**
-Após clonar este repositório, vá para a pasta client (`cd client`) e rode `npm install` para instalar as dependências.
-
-Rode `npm start` para iniciar o front-end
-
--------------
 ### *Pasta src/components*
 
 * NavBar.js => É o componente da barra de navegação
@@ -77,8 +73,6 @@ Rode `npm start` para iniciar o front-end
 * /polls => Nessa pasta encontram-se os componentes que estruturam as enquetes.
 
 * /createPoll => Nessa pasta encontram-se os componentes que estruturam o formulário de criar nova enquete.
-
-------------
 
 ### *Pasta src/components/polls*
 
@@ -113,7 +107,6 @@ O voto é checado pelo método `checkVote()` do Operations.js. A resposta desse 
 
 > Nesse componente também existe um `setInterval()` que utiliza a função `getOptionsByPollId()` para retorna todas as opções de uma enquete. O objetivo aqui é acessar os dados das opções a cada minuto e mostrar o score e o total de votos de uma enquete em tempo real.
 
-------------
 ### *src/components/creaatePoll/CreatePoll.js* 
 
 Este componente é o formulário de criação de novas enquetes. Ele utiliza os componentes PollDate.js e SavePoll.js.

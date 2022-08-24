@@ -97,13 +97,13 @@ Este componente representa uma unica opção de uma enquete. Portanto um `.map()
 
 O voto do usuário é salvo no `localStorage` sempre que o mesmo vota em uma enquete. O voto é salvo como um objeto que contem o id da opção selecionada e da enquete à qual a opção pertence. 
 
-> Todo o projeto foi pensado para representar um sistema de votação cujo usuário pode votar apenas uma vez em cada enquete. O voto do mesmo é salvo no `localStorage` para que não seja necessáiro manter um cadastro de usuários no banco de dados. Para tornar o projeto em um sistema de votação no qual o usuário pode votar quantas vezes quiser em qualquer enquete basta retirar ou comentar o código que salva o voto no `localstorage` e limpar o mesmo usando o método `localStorage.clear()`.
+> Todo o projeto foi pensado para representar um sistema de votação cujo usuário pode votar apenas uma vez em cada enquete. O voto do mesmo é salvo no `localStorage` para que não seja necessário manter um cadastro de usuários no banco de dados. Para tornar o projeto em um sistema de votação no qual o usuário pode votar quantas vezes quiser em qualquer enquete basta retirar ou comentar o código que salva o voto no `localstorage` e limpar o mesmo usando o método `localStorage.clear()`.
 
 O voto é checado pelo método `checkVote()` do Operations.js. A resposta desse método é utilizada nos componentes:
 
 * AllPolls.js => Para informar ao usuário que ele já votou na enquete.
 
-* Poll.js => Para verificar se o usuário votou em uma enquete específica e desabilitar a mesma quaso o usuário tenha votado.
+* Poll.js => Para verificar se o usuário votou em uma enquete específica e desabilitar a mesma caso o usuário tenha votado.
 
 * Option.js => Para verificar qual opção foi votada e mantê-la como selecionada.
 

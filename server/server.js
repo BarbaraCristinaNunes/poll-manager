@@ -12,7 +12,6 @@ const {
     deletePoll,
     deleteOption,
     getOptionById,
-    getTotalVotes,
 } = require("./crud");
 
 app.use(express.urlencoded({ extended: true}));
@@ -42,12 +41,6 @@ app.post("/polls/:id", async (req, res) => {
     await deletePoll(req.params.id)
 });
 
-app.get("/votes/:id", async (req, res) => {
-    console.log("SERVER: ", req.params.id)
-    const result = await getTotalVotes(req.params.id);
-    res.send({total: result});
-});
-
 app.get("/option/:id", async (req, res) => {
     const result = await getOptionById(req.params.id);
     res.send(result);
@@ -64,7 +57,9 @@ app.post("/options", async (req, res) => {
 });
 
 app.put("/options/:id", async (req, res) => {
-    await updateOptionScore(req.params.id);
+    const poll = await getPollById(req.body.pollId)
+    const result = await updateOptionScore(req.params.id, poll);
+    res.send(result);
 });
 
 app.post("/options/:id", async (req, res) => {

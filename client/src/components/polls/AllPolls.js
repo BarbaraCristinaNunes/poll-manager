@@ -72,7 +72,6 @@ export function AllPulls(props) {
                         >
                             <Typography> Crie a primeira enquete </Typography>
                         </Grid>
-                
                 }
         </Grid>
     )

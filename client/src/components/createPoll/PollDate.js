@@ -5,6 +5,7 @@ import {
 } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+
 export default function PollDate(props) {
     const [validStart, setValidStart] = React.useState(true);
     const [validEnd, setValidEnd] = React.useState(true);
@@ -93,7 +94,6 @@ export default function PollDate(props) {
                                 helperText={!validEnd ? message("fim", "início", "maior") : ''}
                             />
                         }
-                        
                     />
                 </LocalizationProvider>
             </Grid>

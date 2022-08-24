@@ -22,20 +22,17 @@ export default function SavePoll(props) {
                         });
                         getPolls(1)
                             .then((data) => {
-                                    const dataRows = maxPaginationPage(data.count, data.limit);
-                                    props.setMaxPage(dataRows);
-                                    props.setPolls(data.rows);
+                                const dataRows = maxPaginationPage(data.count, data.limit);
+                                props.setMaxPage(dataRows);
+                                props.setPolls(data.rows);
                             })
                     })
                 if(newPoll){
                     props.setNewPoll(false);
                 }
-
             }}
-
         >
             Criar
         </Button>
     )
 }
-

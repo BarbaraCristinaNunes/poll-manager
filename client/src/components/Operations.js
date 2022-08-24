@@ -15,7 +15,7 @@ export function convertDateFormat(string){
 }
 
 // check if there are empty inputs in the form 
-export function checkNewPollData(title, start, end, options) {
+export function checkNewPollData(title, start, end, options){
     const data = [title, start, end];
 
     options.forEach((option) => data.push(option));
@@ -26,4 +26,12 @@ export function checkNewPollData(title, start, end, options) {
 
 export function maxPaginationPage(rows, limit){
     return Math.ceil(rows/limit);
+}
+
+export function getTotalVotes(options){
+    let result = 0;
+    options.forEach((option) => {
+        result += option.score;                
+    })
+    return result;
 }

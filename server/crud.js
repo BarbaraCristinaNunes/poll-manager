@@ -28,23 +28,24 @@ module.exports = {
         const data = JSON.parse(JSON.stringify(response));        
         return data;    
     },
-    getPollStatus: async function (id){
-
-        const response = await Polls.findAll({
-            where: {
-                id: id,
-            }
-        });
-        const data = JSON.parse(JSON.stringify(response));  
-        console.log(data);      
-        return data[0].status;    
-    },
     deletePoll: async function (id){
         return await Polls.destroy(
             {
                 where: {id: id},
                 force: true,
             },
+        )
+    },
+    updatePoll: async function (id, poll){
+        await Polls.update(
+            {
+                title: poll.title,
+                start: poll.start,
+                end: poll.end,
+            },
+            {
+                where: {id: id},
+            }
         )
     },
     getOptionById: async function (id){
@@ -68,8 +69,14 @@ module.exports = {
     createOption: async function (object){
         return await Options.create(object);
     },
-    updateOptionScore: async function (id){
-        await Options.increment("score", {by: 1, where: {id: id}});
+    updateOptionScore: async function (id, poll){
+        
+        if(poll[0].status.disabled){
+            return false;
+        }else{
+            await Options.increment("score", {by: 1, where: {id: id}});
+            return true;
+        }
     },
     deleteOption: async function (id){
         return await Options.destroy(
@@ -79,19 +86,4 @@ module.exports = {
             },
         )
     },
-    getTotalVotes: async function (id){
-        console.log("CRUD: ", id)
-        let total = 0;
-        const response = await Options.findAll({
-            where: {
-                pollid: id,
-            }
-        });
-        const data = JSON.parse(JSON.stringify(response));
-        data.forEach((option) => {
-            total += option.score;
-        })
-        return total;
-    },
-
 }

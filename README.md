@@ -61,7 +61,7 @@ No server estão todos os endpoints que ligam o front-end com as funções do cr
 ------------
 ## **Projeto do front-end**
 
-O projeto do front-end encontra-se na pasta `client`. O front-end foi desenvolvido em React.js e Material UI, pois são bibliotacas que facilitam o desenvolvimento de aplicações responsivas, que são ideais para uso mobile, em um curto prazo. 
+O projeto do front-end encontra-se na pasta `client`. O front-end foi desenvolvido em React.js e Material UI, pois são bibliotecas que facilitam o desenvolvimento de aplicações responsivas, que são ideais para uso mobile. 
 ### *Pasta src/components*
 
 * NavBar.js => É o componente da barra de navegação
